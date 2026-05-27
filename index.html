@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenJunto — multi-agent coordination through structured deliberation</title>
+  <meta name="description" content="OpenJunto turns Claude Code into a coordinated team of 16 expert sub-agents with mandatory adversarial peer review. Inspired by Benjamin Franklin's Junto (1727).">
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --muted: #595959;
+      --bg: #ffffff;
+      --accent: #1f4e8c;
+      --border: #d9d9d9;
+      --code-bg: #f4f4f4;
+      --code-fg: #1a1a1a;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      color: var(--fg);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    header { margin-bottom: 2rem; }
+    h1 {
+      font-size: 1.9rem;
+      line-height: 1.2;
+      margin: 0 0 0.4rem;
+      letter-spacing: -0.01em;
+    }
+    .tagline {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0;
+    }
+    h2 {
+      font-size: 1.25rem;
+      margin: 2.5rem 0 0.75rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    p { margin: 0.75rem 0; }
+    a { color: var(--accent); }
+    a:hover { text-decoration: none; }
+    ul { padding-left: 1.25rem; }
+    li { margin: 0.35rem 0; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.9em;
+      background: var(--code-bg);
+      color: var(--code-fg);
+      padding: 0.12em 0.35em;
+      border-radius: 3px;
+    }
+    pre {
+      background: var(--code-bg);
+      color: var(--code-fg);
+      padding: 1rem 1.1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      line-height: 1.5;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.92em;
+    }
+    .step-note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+    }
+    .repos { list-style: none; padding: 0; }
+    .repos li { margin: 0.9rem 0; }
+    .repos a { font-weight: 600; }
+    .repos .desc { color: var(--muted); display: block; font-size: 0.95rem; }
+    .mechanics { margin: 0.75rem 0; }
+    .mechanics dt { font-weight: 600; margin-top: 0.6rem; }
+    .mechanics dd { margin: 0.1rem 0 0; color: var(--muted); }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>OpenJunto</h1>
+      <p class="tagline">Multi-agent coordination through structured deliberation, inspired by Benjamin Franklin's Junto (1727).</p>
+    </header>
+
+    <section aria-labelledby="what">
+      <h2 id="what">What it is</h2>
+      <p>
+        OpenJunto is a Claude Code plugin that turns the assistant into a coordinated
+        team of 16 expert sub-agents — Product Manager, Distinguished Engineer,
+        Security Engineer, SRE, Data Architect, Technical Writer, and more.
+        A Manager agent triages each request, selects the relevant experts,
+        and routes the work through mandatory peer review.
+      </p>
+      <p>
+        The point is the review. Out of the box, a single agent produces work that looks
+        coherent because it optimizes for internal consistency, not for adversarial critique.
+        OpenJunto forces a <em>different</em> expert to challenge each result rather than
+        agree with it — testing failure modes, naming the strongest counterargument,
+        and surfacing what the first pass missed.
+      </p>
+      <p>
+        It is built for senior engineers and tech leads doing production work who want a
+        structured second opinion without holding sixteen perspectives in their own head.
+        It is slower and costs more tokens than baseline Claude; that tradeoff is the
+        product. See <a href="https://github.com/openjunto/oj-claude/blob/main/WHY.md">WHY.md</a>
+        for the honest version, including when it is <em>not</em> worth it.
+      </p>
+
+      <dl class="mechanics">
+        <dt>Complexity triage</dt>
+        <dd>Simple / Moderate / Complex tiers keep process weight proportional to risk.</dd>
+        <dt>Adversarial review</dt>
+        <dd>All Moderate and Complex work is reviewed by an expert from a different domain.</dd>
+        <dt>Strongest objection &amp; falsifier</dt>
+        <dd>Every recommendation carries its best counterargument and a named condition under which it would break in production.</dd>
+        <dt>Circuit breakers</dt>
+        <dd>Work auto-escalates to you after 3 revision cycles or 2 hours without meaningful progress.</dd>
+      </dl>
+    </section>
+
+    <section aria-labelledby="install">
+      <h2 id="install">Get started</h2>
+      <p>The plugin lives in <a href="https://github.com/openjunto/oj-claude">oj-claude</a>. Install it from the marketplace inside a Claude Code session:</p>
+      <pre><code>/plugin marketplace add openjunto/oj-claude
+/plugin install oj@openjunto</code></pre>
+      <p class="step-note">
+        Then start a new session (restart or <code>/clear</code>) to load it. OpenJunto activates
+        automatically — describe the work in plain language; you do not invoke experts by name.
+      </p>
+    </section>
+
+    <section aria-labelledby="repos">
+      <h2 id="repos">Repositories</h2>
+      <ul class="repos">
+        <li>
+          <a href="https://github.com/openjunto/oj-claude">oj-claude</a>
+          <span class="desc">The Claude Code plugin — generated artifacts and Claude-specific configuration.</span>
+        </li>
+        <li>
+          <a href="https://github.com/openjunto/juntospec">juntospec</a>
+          <span class="desc">The specification corpus — the genome. Defines what to generate; contains no generated code.</span>
+        </li>
+        <li>
+          <a href="https://github.com/openjunto/juntogen">juntogen</a>
+          <span class="desc">The generator pipeline that produces oj-claude from juntospec.</span>
+        </li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>
+        Pre-1.0 and under active development.
+        <a href="https://github.com/openjunto">github.com/openjunto</a>
+      </p>
+    </footer>
+  </main>
+</body>
+</html>

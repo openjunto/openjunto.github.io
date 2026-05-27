@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OpenJunto — Claude Code agrees too easily. OpenJunto makes it argue.</title>
-  <meta name="description" content="A coordinated team of expert sub-agents critiques each Claude Code result instead of agreeing with it. Slower, costs ~2–5× the tokens — that tradeoff is the product.">
+  <meta name="description" content="A coordinated team of expert sub-agents critiques each Claude Code result instead of agreeing with it. Slower, costs ~2–5× the tokens — the cost of catching what you'd otherwise ship.">
   <link rel="canonical" href="https://openjunto.github.io/">
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="OpenJunto — Claude Code agrees too easily. OpenJunto makes it argue.">
-  <meta property="og:description" content="A coordinated team of expert sub-agents critiques each Claude Code result instead of agreeing with it. Slower, costs ~2–5× the tokens — that tradeoff is the product.">
+  <meta property="og:description" content="A coordinated team of expert sub-agents critiques each Claude Code result instead of agreeing with it. Slower, costs ~2–5× the tokens — the cost of catching what you'd otherwise ship.">
   <meta property="og:url" content="https://openjunto.github.io/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="OpenJunto — Claude Code agrees too easily. OpenJunto makes it argue.">
-  <meta name="twitter:description" content="A coordinated team of expert sub-agents critiques each Claude Code result instead of agreeing with it. Slower, costs ~2–5× the tokens — that tradeoff is the product.">
+  <meta name="twitter:description" content="A coordinated team of expert sub-agents critiques each Claude Code result instead of agreeing with it. Slower, costs ~2–5× the tokens — the cost of catching what you'd otherwise ship.">
 
   <!-- Inline SVG favicon (data URI keeps this a single file) -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2316140f'/%3E%3Ctext x='16' y='22' font-family='ui-monospace,Menlo,Consolas,monospace' font-size='18' font-weight='700' text-anchor='middle' fill='%23e0a458'%3EJ%3C/text%3E%3C/svg%3E">
@@ -282,7 +282,7 @@
     <header>
       <p class="wordmark">OpenJunto</p>
       <h1>Claude Code agrees too easily.<br>OpenJunto makes it argue.</h1>
-      <p class="tagline">A coordinated team of expert sub-agents critiques each result instead of agreeing with it. Slower, costs ~2–5× the tokens — <em>that tradeoff is the product.</em></p>
+      <p class="tagline">A coordinated team of expert sub-agents critiques each result instead of agreeing with it. Slower, costs ~2–5× the tokens — the cost of catching what you'd otherwise ship.</p>
 
       <section class="loop" aria-label="The review loop">
         <p class="loop-cap">The review loop</p>
@@ -337,19 +337,17 @@
         <em>different</em> expert challenges each result instead of agreeing with it.
       </p>
       <p>
-        The point is the review. A single agent produces work that looks coherent because it
-        optimizes for internal consistency, not adversarial critique. OpenJunto forces the second
-        look: it tests failure modes, names the strongest counterargument, and surfaces what the
-        first pass missed.
+        The point is the review. A single agent's output looks coherent because nothing
+        challenged it. OpenJunto adds a second look: it tests failure modes, names the strongest
+        counterargument, and catches what the first pass missed.
       </p>
       <p>
         Ask it to add rate limiting and it won't just write middleware — Security flags the bypass
         vectors, DevOps sizes the failure modes, and a reviewer probes both.
       </p>
       <p>
-        Built for senior engineers and tech leads doing production work who want a structured second
-        opinion without holding every expert perspective in their own head. It's slower and uses
-        ~2–5× the tokens of baseline Claude — that tradeoff is the product. See
+        Built for senior engineers and tech leads who want a structured second opinion on critical work. It's slower and uses
+        ~2–5× the tokens of baseline Claude — the cost of catching what you'd otherwise ship. See
         <a href="https://github.com/openjunto/oj-claude/blob/HEAD/WHY.md">WHY.md</a> for the honest
         version, including when it's <em>not</em> worth it.
       </p>
@@ -358,7 +356,7 @@
         <dt>Strongest objection &amp; falsifier</dt>
         <dd>Every recommendation carries its best counterargument and the condition under which it would break in production.</dd>
         <dt>Complexity triage</dt>
-        <dd>Simple / Moderate / Complex tiers keep process weight proportional to risk.</dd>
+        <dd>Simple / Moderate / Complex tiers scale the process to the task.</dd>
         <dt>Adversarial review</dt>
         <dd>All Moderate and Complex work is reviewed by an expert from a different domain.</dd>
         <dt>Circuit breakers</dt>

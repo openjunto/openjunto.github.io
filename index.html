@@ -100,6 +100,13 @@
     }
     .tagline em { font-style: normal; color: var(--fg); }
 
+    .scope-chip {
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin: 0 0 0.85rem;
+    }
+
     h2 {
       font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
       font-size: 1.15rem;
@@ -266,6 +273,85 @@
       .flow { max-width: 420px; }
     }
 
+    /* ---- Supported interfaces table ---- */
+    .interfaces {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 0.5rem;
+      font-size: 0.95rem;
+    }
+    .interfaces th,
+    .interfaces td {
+      text-align: left;
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .interfaces thead th {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      background: var(--code-bg);
+    }
+    .interfaces td code {
+      font-size: 0.88em;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .interfaces-caption {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding-top: 0.5rem;
+    }
+
+    @media (max-width: 559px) {
+      /* Hide header row visually but keep it for AT */
+      .interfaces thead {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      .interfaces,
+      .interfaces tbody,
+      .interfaces tr,
+      .interfaces td {
+        display: block;
+        width: 100%;
+      }
+      .interfaces tr {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.6rem 0.75rem;
+        margin: 0.75rem 0;
+      }
+      .interfaces td {
+        padding: 0.15rem 0;
+        border: none;
+      }
+      .interfaces td::before {
+        content: attr(data-label);
+        display: block;
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 0.45rem;
+      }
+      .interfaces td:first-child::before { margin-top: 0; }
+      .interfaces td code {
+        display: inline-block;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+    }
+
     footer {
       margin-top: 3rem;
       padding-top: 1.25rem;
@@ -281,7 +367,8 @@
   <main>
     <header>
       <p class="wordmark">OpenJunto</p>
-      <h1>Claude Code agrees too easily.<br>OpenJunto makes it argue.</h1>
+      <h1>Coding agents agree too easily.<br>OpenJunto makes them argue.</h1>
+      <p class="scope-chip mono" aria-label="Current scope">Today: Claude Code plugin only.</p>
       <p class="tagline">A coordinated team of expert sub-agents critiques each result instead of agreeing with it. Slower, costs ~2–5× the tokens — the cost of catching what you'd otherwise ship.</p>
 
       <section class="loop" aria-label="The review loop">
@@ -315,25 +402,10 @@
       </section>
     </header>
 
-    <section aria-labelledby="install">
-      <h2 id="install">Get started</h2>
-      <p>The plugin lives in <a href="https://github.com/openjunto/oj-claude">oj-claude</a>. Install it from the marketplace inside a Claude Code session:</p>
-      <div class="install-block">
-        <pre id="install-cmd"><code>/plugin marketplace add openjunto/oj-claude
-/plugin install oj@openjunto</code></pre>
-        <button class="copy-btn mono" type="button" data-copy="#install-cmd" hidden>Copy</button>
-      </div>
-      <p class="step-note">
-        Then start a new session to load it. Put it to work with <code>/oj:cycle &lt;what you want done&gt;</code> —
-        the manager triages, selects the experts, and runs the peer review, surfacing dissent. You don't
-        name experts; the manager picks them.
-      </p>
-    </section>
-
     <section aria-labelledby="what">
       <h2 id="what">What it is</h2>
       <p>
-        OpenJunto is a Claude Code plugin. A Manager agent triages each request, pulls in the
+        OpenJunto adds peer review to AI coding agents. Today it ships as a Claude Code plugin. A Manager agent triages each request, pulls in the
         relevant domain experts, and routes the work through mandatory peer review — so a
         <em>different</em> expert challenges each result instead of agreeing with it.
       </p>
@@ -348,7 +420,7 @@
       </p>
       <p>
         Built for senior engineers and tech leads who want a structured second opinion on critical work. It's slower and uses
-        ~2–5× the tokens of baseline Claude — the cost of catching what you'd otherwise ship. See
+        ~2–5× the tokens of a single agent — the cost of catching what you'd otherwise ship. See
         <a href="https://github.com/openjunto/oj-claude/blob/HEAD/WHY.md">WHY.md</a> for the honest
         version, including when it's <em>not</em> worth it.
       </p>
@@ -363,6 +435,46 @@
         <dt>Circuit breakers</dt>
         <dd>Work auto-escalates to you after 3 revision cycles or 2 hours without meaningful progress.</dd>
       </dl>
+    </section>
+
+    <section aria-labelledby="interfaces">
+      <h2 id="interfaces">Supported interfaces</h2>
+      <p>OpenJunto's coordination layer is defined once and generated per interface. Today, Claude Code is the only shipping target.</p>
+      <table class="interfaces">
+        <thead>
+          <tr>
+            <th scope="col">Interface</th>
+            <th scope="col">Status</th>
+            <th scope="col">Install</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Interface">Claude Code</td>
+            <td data-label="Status">Shipping (pre-1.0)</td>
+            <td data-label="Install"><code>/plugin install oj@openjunto</code></td>
+          </tr>
+          <!-- juntogen:supported-interface-row — insert one <tr> here per interface
+               that has been generated, installed end-to-end, and verified on a real
+               task by a non-author. Do not add aspirational rows. -->
+        </tbody>
+      </table>
+      <p class="interfaces-caption">No other interfaces ship today. <code>juntogen</code> is designed to be retargetable, but portability has not yet been demonstrated end-to-end on a second interface.</p>
+    </section>
+
+    <section aria-labelledby="install">
+      <h2 id="install">Get started on Claude Code</h2>
+      <p>The plugin lives in <a href="https://github.com/openjunto/oj-claude">oj-claude</a>. Install it from the marketplace inside a Claude Code session:</p>
+      <div class="install-block">
+        <pre id="install-cmd"><code>/plugin marketplace add openjunto/oj-claude
+/plugin install oj@openjunto</code></pre>
+        <button class="copy-btn mono" type="button" data-copy="#install-cmd" hidden>Copy</button>
+      </div>
+      <p class="step-note">
+        Then start a new session to load it. Put it to work with <code>/oj:cycle &lt;what you want done&gt;</code> —
+        the manager triages, selects the experts, and runs the peer review, surfacing dissent. You don't
+        name experts; the manager picks them.
+      </p>
     </section>
 
     <section aria-labelledby="repos">
